@@ -5,6 +5,9 @@
       <el-form-item label="名稱">
         <el-input v-model="product.name" />
       </el-form-item>
+      <el-form-item label="描述">
+        <el-input v-model="product.description" />
+      </el-form-item>
       <el-form-item label="價格">
         <el-input v-model.number="product.price" />
       </el-form-item>
@@ -34,6 +37,7 @@ const product = ref({
   name: '',
   price: 0,
   stock: 0,
+  description: ''
 });
 
 // 取得商品資料

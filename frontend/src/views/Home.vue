@@ -1,7 +1,6 @@
 <template>
   <header></header>
   <div class="p-6">
-    <div class="text-2xl text-blue-600 font-bold p-4">Hello Tailwind in Vue 3!</div>
     <div v-if="loading" class="text-gray-500">載入中...</div>
 
     <div class="grid md:grid-cols-3 gap-4" v-else>
@@ -19,6 +18,7 @@
 import { ref, onMounted } from 'vue';
 import { useCartStore } from '../stores/cart';
 
+
 const products = ref([]);
 const loading = ref(true);
 const cart = useCartStore();
@@ -26,7 +26,6 @@ const cart = useCartStore();
 const fetchProducts = async () => {
   const res = await fetch('http://localhost:3000/api/products');
   const data = await res.json();
-  console.log('data', data);
   products.value = data;
   loading.value = false;
 };

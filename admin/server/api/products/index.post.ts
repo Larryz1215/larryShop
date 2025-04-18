@@ -14,7 +14,8 @@ export default defineEventHandler(async (event) => {
       data: {
         name: body.name,
         price: body.price,
-        stock: body.stock
+        stock: body.stock,
+        description: body.description || ''
       }
     });
 
