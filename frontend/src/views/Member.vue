@@ -5,13 +5,13 @@
         <h2 class="text-xl font-semibold mb-4">個人資料</h2>
         <el-form :model="user" label-width="100px">
           <el-form-item label="會員編號">
-            <span>{{ user.user.id }}</span>
+            <span>{{ user?.user?.id }}</span>
           </el-form-item>
           <el-form-item label="使用者名稱">
-            <span>{{ user.user.name }}</span>
+            <span>{{ user?.user?.name }}</span>
           </el-form-item>
           <el-form-item label="Email">
-            <span>{{ user.user.email }}</span>
+            <span>{{ user?.user?.email }}</span>
           </el-form-item>
         </el-form>
       </el-card>
@@ -29,9 +29,9 @@
           <el-collapse-item v-for="order in orders" :key="order.id" :name="String(order.id)">
             <template #title>
               <div class="flex justify-between w-full pl-3">
-                <span>訂單編號：{{ order.id }}</span>
-                <span>建立時間：{{ formatDate(order.createdAt) }}</span>
-                <span>總金額：NT$ {{ order.total }}</span>
+                <span>訂單編號：{{ order?.id }}</span>
+                <span>建立時間：{{ formatDate(order?.createdAt) }}</span>
+                <span>總金額：NT$ {{ order?.total }}</span>
               </div>
             </template>
 
@@ -49,11 +49,20 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useUserStore } from '../stores/user';
+import { useRoute } from 'vue-router';
+import router from '../router';
+
 const { user } = useUserStore();
 const orders = ref([]);
 const loading = ref(true);
+const route = useRoute();
 
 onMounted(async () => {
+  if (!user.user) {
+    router.push('/login');
+    return;
+  }
+
   try {
     const res = await fetch(`/api/users/${user.user.id}`, {
       method: 'GET',

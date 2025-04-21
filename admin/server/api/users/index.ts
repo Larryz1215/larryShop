@@ -1,4 +1,3 @@
-// server/api/users/index.ts
 import { prisma } from '@/server/lib/prisma';
 
 export default defineEventHandler(async () => {

@@ -1,4 +1,3 @@
-// server/api/users/[id].ts
 import { prisma } from '@/server/lib/prisma';
 
 export default defineEventHandler(async (event) => {
@@ -12,7 +11,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const user = await prisma.user.findUnique({
+    const users = await prisma.user.findUnique({
       where: { id: Number(id) },
       include: {
         orders: {
@@ -27,12 +26,14 @@ export default defineEventHandler(async (event) => {
       }
     });
 
-    if (!user) {
+    if (!users) {
       return {
         success: false,
         message: '找不到該使用者'
       };
     }
+
+    const { password, ...user } = users;
 
     return {
       success: true,

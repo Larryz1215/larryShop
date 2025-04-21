@@ -23,11 +23,11 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { useUserStore } from '../stores/user';
-import { toRef } from 'vue';
+import { computed } from 'vue';
 
 const userStore = useUserStore();
 const user = userStore.user;
-const isLogin = toRef(userStore.isLogin);
+const isLogin = computed(() => userStore.isLogin);
 const router = useRouter();
 const goIndex = () => {
   router.push('/');

@@ -12,16 +12,16 @@
     <!-- 訂單列表 -->
     <div v-else>
       <el-table :data="data.users" stripe class="w-full">
-        <el-table-column label="會員編號" prop="id" width="120" />
-        <el-table-column label="姓名" prop="name" width="150" />
-        <el-table-column label="EMail" prop="email" width="200" />
-        <el-table-column label="創建時間" prop="createdAt" width="180">
+        <el-table-column label="會員編號" prop="id" />
+        <el-table-column label="姓名" prop="name" />
+        <el-table-column label="EMail" prop="email" />
+        <el-table-column label="創建時間" prop="createdAt">
           <template #default="{ row }">
             <span>{{ new Date(row.createdAt).toLocaleString() }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" width="180">
+        <el-table-column label="操作">
           <template #default="{ row }">
             <el-button type="primary" size="small" @click="goToDetail(row.id)"> 查看 </el-button>
           </template>

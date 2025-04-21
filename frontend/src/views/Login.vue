@@ -9,6 +9,14 @@
         <el-form-item label="密碼">
           <el-input v-model="form.password" placeholder="請輸入密碼" type="password" show-password />
         </el-form-item>
+        <div class="flex justify-between">
+          <el-form-item>
+            <router-link to="/register" class="float-right text-sm">註冊帳號</router-link>
+          </el-form-item>
+          <el-form-item>
+            <router-link to="/forgot-password" class="float-right text-sm">忘記密碼</router-link>
+          </el-form-item>
+        </div>
         <el-button type="primary" class="w-full" @click="login">登入</el-button>
       </el-form>
     </div>
