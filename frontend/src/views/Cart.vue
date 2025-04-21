@@ -32,10 +32,13 @@ import { useCartStore } from '../stores/cart';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
+import { useUserStore } from '../stores/user';
 
 const cart = useCartStore();
 const loading = ref(false);
 const router = useRouter();
+const userStore = useUserStore();
+const user = userStore.user;
 
 // 送出訂單
 const submitOrder = async () => {
@@ -56,13 +59,14 @@ const submitOrder = async () => {
       return;
     }
 
-    // 提交訂單
+    // 提交訂單;
     const orderRes = await fetch('http://localhost:3000/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         items: cart.items,
-        total: cart.totalPrice
+        total: cart.totalPrice,
+        userId: user.user.id // 假設你有用戶 ID
       })
     });
 

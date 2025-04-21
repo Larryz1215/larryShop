@@ -24,5 +24,5 @@ definePageMeta({
 });
 // 用 useFetch 呼叫 API
 const { data: product, pending, error } = await useFetch('/api/products');
-console.log('products', product);
+
 </script>

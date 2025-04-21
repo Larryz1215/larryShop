@@ -29,6 +29,7 @@
           <el-menu-item index="products">📦 商品列表</el-menu-item>
           <el-menu-item index="product-add">➕ 新增商品</el-menu-item>
           <el-menu-item index="orders">🧾 訂單</el-menu-item>
+          <el-menu-item index="users">👤 會員管理</el-menu-item>
         </el-menu>
       </el-aside>
 
@@ -59,6 +60,9 @@ const handleMenuClick = (index: string) => {
       break;
     case 'orders':
       router.push('/orders');
+      break;
+    case 'users':
+      router.push('/users');
       break;
   }
 };

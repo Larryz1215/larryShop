@@ -1,32 +1,34 @@
 import { prisma } from '~/server/lib/prisma';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { email, password } = body;
 
+  console.log('email', email);
+  console.log('password', password);
+
   if (!email || !password) {
-    return sendError(event, createError({ statusCode: 400, statusMessage: '請輸入帳號與密碼' }));
+    return sendError(event, createError({ statusCode: 400, message: '請輸入帳號與密碼' }));
   }
 
   // 找使用者
   const user = await prisma.user.findUnique({
     where: { email }
   });
+  console.log('user', user);
 
   if (!user) {
-    return sendError(event, createError({ statusCode: 401, statusMessage: '使用者不存在' }));
+    return sendError(event, createError({ statusCode: 401, message: '使用者不存在' }));
   }
 
   // 比對密碼
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return sendError(event, createError({ statusCode: 401, statusMessage: '密碼錯誤' }));
+    return sendError(event, createError({ statusCode: 401, message: '密碼錯誤' }));
   }
-
+  console.log('isMatch', isMatch);
   // 產生 JWT token
   const token = jwt.sign(
     { userId: user.id, email: user.email },

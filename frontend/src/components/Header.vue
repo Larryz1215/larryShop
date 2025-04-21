@@ -12,7 +12,7 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>個人資料</el-dropdown-item>
+            <el-dropdown-item @click="goMember()">個人資料</el-dropdown-item>
             <el-dropdown-item @click="goLogin()"> {{ isLogin ? '登出' : '登入' }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -23,16 +23,26 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { useUserStore } from '../stores/user';
+import { toRef } from 'vue';
 
 const userStore = useUserStore();
 const user = userStore.user;
-const isLogin = userStore.isLogin;
+const isLogin = toRef(userStore.isLogin);
 const router = useRouter();
 const goIndex = () => {
   router.push('/');
 };
 const goLogin = () => {
+  if (isLogin.value) {
+    userStore.logout();
+    router.push('/');
+    return;
+  }
+  // 如果沒有登入，則導向登入頁面
   router.push('/login');
+};
+const goMember = () => {
+  router.push('/member');
 };
 </script>
 <style lang=""></style>

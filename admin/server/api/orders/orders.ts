@@ -1,16 +1,21 @@
 import { prisma } from '@/server/lib/prisma';
-import { readBody, H3Event } from 'h3';
+import { readBody } from 'h3';
 
-export default defineEventHandler(async (event: H3Event) => {
+export default defineEventHandler(async (event) => {
   if (getMethod(event) !== 'POST') {
     return sendError(event, createError({ statusCode: 405, statusMessage: '不支援的 HTTP 方法' }));
   }
 
   const body = await readBody(event);
-  const { items, total } = body;
+  const { items, total, userId } = body;
+  console.log('Request body:', body);
+  console.log('Ready to create order with userId:', userId);
 
   if (!items || !Array.isArray(items) || items.length === 0) {
     return { success: false, message: '無效的訂單資料' };
+  }
+  if (!userId) {
+    return { success: false, message: '缺少使用者 ID' };
   }
   try {
     // 1. 先確認所有商品庫存足夠
@@ -37,10 +42,11 @@ export default defineEventHandler(async (event: H3Event) => {
             quantity: item.qty,
             price: item.price
           }))
-        }
+        },
+        userId: userId
       }
     });
-
+    console.log('Order created:', order);
     // 3. 扣除庫存
     for (const item of items) {
       await prisma.product.update({

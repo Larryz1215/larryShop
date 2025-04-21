@@ -18,7 +18,11 @@
 <script setup>
 import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '../stores/auth';
+import { useUserStore } from '../stores/user';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const form = ref({
   email: '',
@@ -26,25 +30,29 @@ const form = ref({
 });
 const formRef = ref(null);
 const auth = useAuthStore();
-
+const user = useUserStore();
 const login = async () => {
   try {
-    const response = await $fetch('/api/login', {
+    const res = await fetch('http://localhost:3000/api/login', {
       method: 'POST',
-      body: form.value
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form.value)
     });
 
-    if (response.token) {
-      auth.setToken(response.token);
-      auth.setUser(response.user);
+    const result = await res.json(); // 🔹重點：解析 response 的 JSON 內容
+
+    if (result.token) {
+      // auth.setToken(result.token);
+      // auth.setUser(result.user);
+      user.login(result);
       ElMessage.success('登入成功');
-      navigateTo('/'); // 登入後導向首頁或其他頁面
+      router.push('/');
     } else {
-      throw new Error('登入回傳資料異常');
+      throw new Error(result.message || '登入失敗');
     }
   } catch (error) {
     console.error('登入失敗:', error);
-    ElMessage.error('帳號或密碼錯誤');
+    ElMessage.error(error.message || '帳號或密碼錯誤');
   }
 };
 </script>

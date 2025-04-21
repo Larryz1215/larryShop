@@ -1,7 +1,61 @@
-<template lang="">
-  <div>user</div>
+<template>
+  <div class="container mx-auto p-6">
+    <h2 class="text-2xl font-semibold mb-6 text-center">會員管理</h2>
+
+    <!-- 載入中或錯誤提示 -->
+    <div v-if="pending" class="flex justify-center items-center">
+      <!-- <el-spin></el-spin> -->
+    </div>
+
+    <div v-else-if="error" class="text-red-500 text-center">發生錯誤：{{ error.message }}</div>
+
+    <!-- 訂單列表 -->
+    <div v-else>
+      <el-table :data="data.users" stripe class="w-full">
+        <el-table-column label="會員編號" prop="id" width="120" />
+        <el-table-column label="姓名" prop="name" width="150" />
+        <el-table-column label="EMail" prop="email" width="200" />
+        <el-table-column label="創建時間" prop="createdAt" width="180">
+          <template #default="{ row }">
+            <span>{{ new Date(row.createdAt).toLocaleString() }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="操作" width="180">
+          <template #default="{ row }">
+            <el-button type="primary" size="small" @click="goToDetail(row.id)"> 查看 </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+  </div>
 </template>
-<script>
-export default {};
+
+<script setup>
+definePageMeta({
+  layout: 'admin'
+});
+
+const { data, pending, error, refresh } = await useFetch('/api/users');
+console.log('users', data);
+const router = useRouter();
+const goToDetail = (id) => {
+  router.push(`/users/${id}`);
+};
 </script>
-<style lang=""></style>
+
+<style scoped>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.el-table {
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.el-button {
+  font-size: 14px;
+}
+</style>

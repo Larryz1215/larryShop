@@ -49,19 +49,27 @@ const form = reactive({
   description: ''
 });
 
-const { data: products, refresh, pending, error } = await useFetch('/api/products');
+const {
+  data: products,
+  refresh,
+  pending,
+  error
+} = await useFetch('/api/products', {
+  immediate: true
+});
+// 這裡的 immediate: true 是為了在組件掛載時立即獲取資料
 
-if (pending) {
-  console.log('Loading...');
-}
+// 監聽取得商品的狀態
+watchEffect(() => {
+  if (pending.value) {
+    console.log('Loading...');
+  } else if (error.value) {
+    console.error('Fetch error:', error.value);
+  } else if (products.value) {
+    console.log('Fetch success:', products.value);
+  }
+});
 
-if (error) {
-  console.error('Error fetching products:', error);
-}
-
-if (products) {
-  console.log('Fetched products:', products);
-}
 async function createProduct() {
   try {
     await $fetch('/api/products', {
