@@ -20,5 +20,6 @@ export default defineNuxtConfig({
     public: {}
   },
   plugins: ['@/plugins/element-plus-icons.ts'],
-  modules: ['@nuxtjs/tailwindcss']
+  // modules: ['@nuxtjs/tailwindcss']
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'pinia-plugin-persistedstate/nuxt']
 });

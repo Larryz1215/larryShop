@@ -6,19 +6,21 @@
       <div @click="goIndex" class="text-xl font-bold">🛒 後台管理</div>
 
       <!-- User Dropdown -->
-      <el-dropdown trigger="click">
-        <span class="cursor-pointer flex items-center gap-2">
-          <el-icon><User /></el-icon>
-          <span>管理者</span>
-          <el-icon><ArrowDown /></el-icon>
-        </span>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item>個人資料</el-dropdown-item>
-            <el-dropdown-item divided @click="logout">登出</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
+      <ClientOnly>
+        <el-dropdown trigger="click">
+          <span class="cursor-pointer flex items-center gap-2">
+            <el-icon><User /></el-icon>
+            <span>管理者</span>
+            <el-icon><ArrowDown /></el-icon>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>個人資料</el-dropdown-item>
+              <el-dropdown-item divided @click="logout">登出</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </ClientOnly>
     </el-header>
 
     <!-- Sidebar + Main Content -->
@@ -29,7 +31,13 @@
           <el-menu-item index="products">📦 商品列表</el-menu-item>
           <el-menu-item index="product-add">➕ 新增商品</el-menu-item>
           <el-menu-item index="orders">🧾 訂單</el-menu-item>
-          <el-menu-item index="users">👤 會員管理</el-menu-item>
+          <el-sub-menu index="system">
+            <template #title
+              ><el-icon><Setting /></el-icon> 系統管理</template
+            >
+            <el-menu-item index="users">👤 會員管理</el-menu-item>
+            <el-menu-item index="admin">👑 管理員頁面</el-menu-item>
+          </el-sub-menu>
         </el-menu>
       </el-aside>
 
@@ -43,8 +51,10 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useAuthStore } from '~/store/auth';
 
+const authStore = useAuthStore();
 const activeMenu = ref('');
 const router = useRouter();
 
@@ -64,6 +74,9 @@ const handleMenuClick = (index: string) => {
     case 'users':
       router.push('/users');
       break;
+    case 'admin':
+      router.push('/admin');
+      break;
   }
 };
 
@@ -72,7 +85,7 @@ const goIndex = () => {
 };
 const logout = () => {
   // 登出邏輯
-  console.log('登出中...');
+  authStore.logout();
   router.push('/login');
 };
 </script>

@@ -6,8 +6,6 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { email, password } = body;
 
-  console.log('email', email);
-  console.log('password', password);
 
   if (!email || !password) {
     return sendError(event, createError({ statusCode: 400, message: '請輸入帳號與密碼' }));
@@ -17,7 +15,6 @@ export default defineEventHandler(async (event) => {
   const user = await prisma.user.findUnique({
     where: { email }
   });
-  console.log('user', user);
 
   if (!user) {
     return sendError(event, createError({ statusCode: 401, message: '使用者不存在' }));
@@ -28,7 +25,7 @@ export default defineEventHandler(async (event) => {
   if (!isMatch) {
     return sendError(event, createError({ statusCode: 401, message: '密碼錯誤' }));
   }
-  console.log('isMatch', isMatch);
+
   // 產生 JWT token
   const token = jwt.sign(
     { userId: user.id, email: user.email },

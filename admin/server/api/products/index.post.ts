@@ -3,8 +3,8 @@ export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
 
-    console.log('📥 新增商品資料:', body);
-    console.log('📦 DATABASE_URL:', process.env.DATABASE_URL);
+    // console.log('📥 新增商品資料:', body);
+    // console.log('📦 DATABASE_URL:', process.env.DATABASE_URL);
 
     if (!body.name || typeof body.price !== 'number' || typeof body.stock !== 'number') {
       throw createError({ statusCode: 400, message: '請填寫完整欄位' });

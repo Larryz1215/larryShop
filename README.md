@@ -36,7 +36,8 @@ MyShop/
 - **功能模組**：
   - 商品管理（新增 / 編輯 / 刪除 / 庫存設定）
   - 訂單管理（查看訂單、訂單詳情）
-  - 使用者登入 / 登出（可擴充）
+  - 管理員登入 / 登出（可擴充）
+  - 管理員管理 (新增、編輯)
 
 ---
 
@@ -48,6 +49,9 @@ MyShop/
   - `Product`：商品資訊與庫存數量
   - `Order`：訂單總覽資料
   - `OrderItem`：訂單中的每一筆商品與數量明細
+  - `User`: 會員
+  - `Admin`: 管理員
+
 
 ---
 
@@ -58,6 +62,15 @@ MyShop/
 - **/api/products/stock-check**：驗證商品庫存
 - **/api/orders**：建立訂單並扣除庫存
 - **/api/orders/[id]**：查詢訂單詳情
+- **/api/admin**:管理員列表
+- **/api/admin/[id]** :管理員詳情
+- **/api/admin/login**:管理員登入
+- **/api/admin/register**:創建管理員
+- **/api/user/index**:會員列表
+- **/api/user/[id]** :會員詳情
+- **/api/user/register**:創建會員
+- **/login**:會員登入
+
 
 ---
 
@@ -65,17 +78,17 @@ MyShop/
 
 ### 共用
 
-- `prisma`：資料庫 ORM
+- `prisma`：現代化 TypeScript ORM，對接 PostgreSQL、MySQL 等資料庫
 - `@prisma/client`：Prisma 操作 client
 - `postgresql`：資料庫
+- `tailwindcss`：CSS 框架
+- `element-plus`：UI 元件庫
 
 ### Frontend
 
 - `vue@3`：JavaScript 前端框架
 - `pinia`：狀態管理工具
 - `vue-router`：前端路由管理
-- `tailwindcss`：CSS 框架
-- `element-plus`：UI 元件庫
 - `pinia-plugin-persistedstate`：Pinia 狀態持久化
 
 ### Admin
@@ -83,6 +96,9 @@ MyShop/
 - `nuxt@3`：Vue 的 SSR 全端框架
 - `@element-plus/nuxt`：Element Plus Nuxt 插件
 - `@tailwindcss/nuxt`：Tailwind Nuxt 插件
+- `resend` : Email API，用來發送註冊確認、重設密碼等通知
+- `jsonwebtoken` : 用於產生與驗證 JWT token，支援登入、身份驗證流程
+- `bcryptjs` : 密碼加密套件，用於安全儲存使用者密碼
 
 ### 1. 前端啟動
 
@@ -113,3 +129,8 @@ MyShop/
 #### 強制重置資料庫（會清空所有資料）
 
 `npx prisma db push --force-reset`
+
+
+#### 如果有新的TABLE 要加入現有資料庫
+`npx prisma generate`
+`npx prisma db push`

@@ -11,24 +11,24 @@
 
     <!-- 訂單列表 -->
     <div v-else>
-      <el-table :data="data.orders" stripe class="w-full">
-        <el-table-column label="訂單編號" prop="id"  />
-        <el-table-column label="總金額" prop="total" >
+      <el-table :data="data.orders" stripe :default-sort="{ prop: 'id' }" class="w-full">
+        <el-table-column label="訂單編號" prop="id" />
+        <el-table-column label="總金額" prop="total">
           <template #default="{ row }">
             <span class="font-semibold">${{ row.total }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="創建時間" prop="createdAt" >
+        <el-table-column label="創建時間" prop="createdAt">
           <template #default="{ row }">
             <span>{{ new Date(row.createdAt).toLocaleString() }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="商品數量" >
+        <el-table-column label="商品數量">
           <template #default="{ row }">
             <span>{{ row.items.length }} 項</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" >
+        <el-table-column label="操作">
           <template #default="{ row }">
             <el-button type="primary" size="small" @click="goToDetail(row.id)"> 查看 </el-button>
           </template>

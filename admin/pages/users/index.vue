@@ -11,7 +11,7 @@
 
     <!-- 訂單列表 -->
     <div v-else>
-      <el-table :data="data.users" stripe class="w-full">
+      <el-table :data="data.users" stripe :default-sort="{ prop: 'id' }" class="w-full">
         <el-table-column label="會員編號" prop="id" />
         <el-table-column label="姓名" prop="name" />
         <el-table-column label="EMail" prop="email" />
@@ -37,8 +37,8 @@ definePageMeta({
 });
 
 const { data, pending, error, refresh } = await useFetch('/api/users');
-console.log('users', data);
 const router = useRouter();
+
 const goToDetail = (id) => {
   router.push(`/users/${id}`);
 };
