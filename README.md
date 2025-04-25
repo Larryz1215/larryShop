@@ -2,6 +2,7 @@
 
 這是一個全端電商網站專案，包含後台管理與前台購物體驗，支援商品管理、購物車、訂單建立與庫存管理等完整功能。
 
+#### <a href="larry-shop-frontend.vercel.app">專案網址</a>
 ---
 
 ## 🔧 專案架構
@@ -46,11 +47,11 @@ MyShop/
 - **類型**：PostgreSQL（部署於 Render）
 - **ORM**：Prisma ORM
 - **Schema 架構**：
-  - `Product`：商品資訊與庫存數量
-  - `Order`：訂單總覽資料
-  - `OrderItem`：訂單中的每一筆商品與數量明細
-  - `User`: 會員
-  - `Admin`: 管理員
+  - Product：商品資訊與庫存數量
+  - Order：訂單總覽資料
+  - OrderItem：訂單中的每一筆商品與數量明細
+  - User: 會員
+  - Admin: 管理員
 
 
 ---

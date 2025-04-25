@@ -43,6 +43,15 @@ const user = userStore.user;
 // 送出訂單
 const submitOrder = async () => {
   loading.value = true;
+  // 檢查用戶是否登入
+  if (!user.isLogin) {
+    ElMessage.error('❌ 請先登入，自動倒轉到登入頁面');
+    loading.value = false;
+    setTimeout(() => {
+      router.push('/login');
+    }, 500);
+    return;
+  }
   try {
     // 先檢查每個商品是否庫存足夠
     const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/stock-check`, {
@@ -60,7 +69,7 @@ const submitOrder = async () => {
     }
 
     // 提交訂單;
-    const orderRes = await fetch('http://localhost:3000/api/orders', {
+    const orderRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
