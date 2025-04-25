@@ -24,7 +24,7 @@ const loading = ref(true);
 const cart = useCartStore();
 
 const fetchProducts = async () => {
-  const res = await fetch('http://localhost:3000/api/products');
+  const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products`);
   const data = await res.json();
   products.value = data;
   loading.value = false;

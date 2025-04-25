@@ -45,7 +45,7 @@ const submitOrder = async () => {
   loading.value = true;
   try {
     // 先檢查每個商品是否庫存足夠
-    const res = await fetch('http://localhost:3000/api/products/stock-check', {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/stock-check`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: cart.items })

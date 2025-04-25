@@ -27,7 +27,7 @@ const loading = ref(true);
 
 onMounted(async () => {
   try {
-    const res = await fetch(`/api/products/${route.params.id}`);
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${route.params.id}`);
     if (res.ok) {
       product.value = await res.json();
     }

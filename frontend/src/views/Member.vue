@@ -64,7 +64,7 @@ onMounted(async () => {
   }
 
   try {
-    const res = await fetch(`/api/users/${user.user.id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/${user.user.id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
