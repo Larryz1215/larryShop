@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     // devProxy: {
     //   '/api': 'http://localhost:3000'
     // }
-    preset: 'vercel'
+    preset: 'vercel',
+    
   },
   alias: {
     '~': resolve(__dirname, './'),

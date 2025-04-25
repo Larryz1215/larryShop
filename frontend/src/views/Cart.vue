@@ -44,7 +44,7 @@ const user = userStore.user;
 const submitOrder = async () => {
   loading.value = true;
   // 檢查用戶是否登入
-  if (!user.isLogin) {
+  if (!user.user) {
     ElMessage.error('❌ 請先登入，自動倒轉到登入頁面');
     loading.value = false;
     setTimeout(() => {
@@ -69,7 +69,7 @@ const submitOrder = async () => {
     }
 
     // 提交訂單;
-    const orderRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders`, {
+    const orderRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -18,7 +18,7 @@ export default defineConfig({
     tailwindcss()
   ],
   server: {
-    port: 5173 // 或你自己想要的 port
+    // port: 5173 // 或你自己想要的 port
     // proxy: {
     //   '/api': 'http://localhost:3000' // 讓 frontend 透過 proxy 呼叫後台 API
     // }
