@@ -19,13 +19,13 @@ const password = ref('');
 
 const login = async () => {
   const authStore = useAuthStore();
-  const res = await $fetch('/api/admin/login', {
+  const result = await $fetch('/api/admin/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ adminName: adminName.value, password: password.value })
   });
 
-  const result = await res.json();
+  // const result = await res.json();
 
   if (result.success) {
     ElMessage.success('登入成功');
