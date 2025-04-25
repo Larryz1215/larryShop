@@ -19,7 +19,7 @@ const password = ref('');
 
 const login = async () => {
   const authStore = useAuthStore();
-  const res = await fetch('/api/admin/login', {
+  const res = await $fetch('/api/admin/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ adminName: adminName.value, password: password.value })

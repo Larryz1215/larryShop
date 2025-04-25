@@ -1,6 +1,6 @@
 <template>
   <div class="p-6">
-    <h1 class="text-2xl font-bold mb-6">📦 所有商品</h1>
+    <h1 class="text-2xl font-bold mb-6">所有商品</h1>
 
     <div v-if="pending">載入中...</div>
 
@@ -24,5 +24,4 @@ definePageMeta({
 });
 // 用 useFetch 呼叫 API
 const { data: product, pending, error } = await useFetch('/api/products');
-
 </script>

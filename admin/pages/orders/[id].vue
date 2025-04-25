@@ -3,7 +3,9 @@
     <h1 class="text-2xl font-bold mb-4">訂單詳情 #{{ order?.id }}</h1>
 
     <el-card>
-      <p>{{ user?.id }}</p>
+      <p>會員名稱：{{ order?.user?.name }}</p>
+      <p>會員編號：{{ order?.user?.id }}</p>
+      <p>email：{{ order?.user?.email }}</p>
       <p>建立時間：{{ formatDate(order?.createdAt) }}</p>
       <p>
         總金額：<strong class="text-red-500">${{ order?.total }}</strong>

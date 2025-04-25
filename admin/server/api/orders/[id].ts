@@ -1,7 +1,7 @@
-import { prisma } from '@/server/lib/prisma'
+import { prisma } from '@/server/lib/prisma';
 
 export default defineEventHandler(async (event) => {
-  const id = Number(getRouterParam(event, 'id'))
+  const id = Number(getRouterParam(event, 'id'));
   const order = await prisma.order.findUnique({
     where: { id },
     include: {
@@ -9,9 +9,10 @@ export default defineEventHandler(async (event) => {
         include: {
           product: true
         }
-      }
+      },
+      user: true
     }
-  })
+  });
 
-  return order
-})
+  return order;
+});

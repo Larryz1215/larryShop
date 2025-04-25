@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     // devProxy: {
     //   '/api': 'http://localhost:3000'
     // }
+    preset: 'vercel'
   },
   alias: {
     '~': resolve(__dirname, './'),
@@ -17,9 +18,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // 用 dotenv 控制資料庫連線
-    public: {}
+    public: {
+      apiBase: '/api'
+    }
   },
   plugins: ['@/plugins/element-plus-icons.ts'],
-  // modules: ['@nuxtjs/tailwindcss']
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'pinia-plugin-persistedstate/nuxt']
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'pinia-plugin-persistedstate/nuxt', 'nuxt-icon']
 });

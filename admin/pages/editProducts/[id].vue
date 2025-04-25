@@ -34,10 +34,12 @@ const router = useRouter();
 const productId = route.params.id as string;
 
 const product = ref({
+  id:0,
   name: '',
   price: 0,
   stock: 0,
-  description: ''
+  description: '',
+  createdAt: Date
 });
 
 // 取得商品資料
