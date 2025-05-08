@@ -5,6 +5,7 @@
       <h2 class="text-lg font-semibold">{{ product.name }}</h2>
       <p class="text-sm text-gray-600 mb-1">NT$ {{ product.price }}</p>
       <p class="text-sm text-gray-500 mb-3">{{ product.description }}</p>
+      <p>庫存:{{ product.stock }} </p>
       <el-button @click="addToCart(product)" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">加入購物車</el-button>
     </div>
     <div v-else>
