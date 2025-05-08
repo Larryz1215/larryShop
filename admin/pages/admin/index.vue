@@ -150,7 +150,7 @@ const toggleActive = async (admin) => {
 };
 
 const openAddDialog = () => {
-  addForm.value = { adminName, email: '', password: '', isSuper: false, isActive: true };
+  addForm.value = { adminName:'', email: '', password: '', isSuper: false, isActive: true };
   addDialogVisible.value = true;
 };
 
