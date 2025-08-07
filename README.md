@@ -2,7 +2,7 @@
 
 這是一個全端電商網站專案，包含後台管理與前台購物體驗，支援商品管理、購物車、訂單建立與庫存管理等完整功能。
 
-#### <a href="larry-shop-frontend.vercel.app">專案網址</a>
+#### <a href="larry-shop-frontend-tawny.vercel.app/">專案網址</a>
 ---
 
 ## 🔧 專案架構
