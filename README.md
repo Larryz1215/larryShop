@@ -8,10 +8,10 @@
 ## 🔧 專案架構
 
 MyShop/
-├── frontend/ # 使用 Vite + Vue3 建構的購物網站前台
-├── admin/ # 使用 Nuxt3 開發的後台管理系統
-├── prisma/ # Prisma schema 與 migration 設定
-├── generated/ # Prisma 生成的 client └── .env # 資料庫連線設定
+-  frontend/ # 使用 Vite + Vue3 建構的購物網站前台
+-  admin/ # 使用 Nuxt3 開發的後台管理系統
+-  prisma/ # Prisma schema 與 migration 設定
+-  generated/ # Prisma 生成的 client └── .env # 資料庫連線設定
 
 ---
 
